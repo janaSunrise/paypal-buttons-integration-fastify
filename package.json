@@ -1,0 +1,22 @@
+{
+  "name": "paypal-buttons-fastify",
+  "version": "1.0.0",
+  "description": "A boilerplate for paypal payments SDK in fastify framework.",
+  "main": "app.js",
+  "scripts": {
+    "serve": "nodemon app",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "paypal-buttons",
+    "fastify",
+    "paypal-sdk",
+    "fastify-paypal-buttons"
+  ],
+  "author": "Sunrit Jana",
+  "license": "GPL-3.0-or-later",
+  "dependencies": {
+    "fastify": "^3.14.0",
+    "nodemon": "^2.0.7"
+  }
+}
