@@ -6,4 +6,4 @@ const checkoutNodeJsSdk = require('@paypal/checkout-server-sdk');
 const environment = new checkoutNodeJsSdk.core.SandboxEnvironment(clientID, clientSecret);
 const client = new checkoutNodeJsSdk.core.PayPalHttpClient(environment);
 
-module.exports = {client: client};
+module.exports = {client, environment, checkoutNodeJsSdk};

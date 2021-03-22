@@ -1,4 +1,5 @@
-const fastify = require('fastify')({logger: true});
+const fastify = require('fastify')({ logger: true });
+const env = require('./utils/env');
 
 // App constants
 const host = process.env.HOST || "127.0.0.1";
@@ -13,7 +14,11 @@ fastify.register(require('point-of-view'), {
 
 // Declare a route
 fastify.get('/', async (req, res) => {
-  return { hello: "world" };
+  return res.view('/templates/index.ejs', { clientID: env.clientID, merchantID: env.merchantID });
+})
+
+fastify.get('/paypal/payment', async (req, res) => {
+
 })
 
 // Run the server
