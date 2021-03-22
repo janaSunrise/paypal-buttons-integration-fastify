@@ -10,6 +10,9 @@ npm install
 ```
 And it'll install dependencies to get you started!
 
+Then, rename `.env.example` to `.env` and then fill the variables using credentials
+from your paypal account in developer panel [here](https://developer.paypal.com/developer/applications/).
+
 Run the server:
 ```bash
 npm run serve
