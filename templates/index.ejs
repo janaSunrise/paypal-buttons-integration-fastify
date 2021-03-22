@@ -17,19 +17,16 @@
     <script>
         paypal.Buttons({
             createOrder: function() {
-                return fetch('/paypal/payment', {
-                    method: 'post',
-                    headers: {
-                        'content-type': 'application/json'
-                    }
-                }).then(function(res) {
-                    return res.json();
-                }).then(function(data) {
-                    return data.id; // Use the key sent by your server's response, ex. 'id' or 'token'
-                });
+                return fetch('/paypal/payment')
+                    .then(function(res) {
+                        return res.json();
+                    }).then(function(data) {
+                        return data.id; // Use the key sent by your server's response, ex. 'id' or 'token'
+                    });
             },
             onApprove: function(data) {
-                return fetch('/my-server/capture-paypal-transaction', {
+                return fetch('/paypal/capture', {
+                    method: "POST",
                     headers: {
                         'content-type': 'application/json'
                     },

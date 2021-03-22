@@ -1,6 +1,6 @@
-import { checkoutNodeJsSdk } from './auth';
+const auth = require('./auth');
 
-const request = new checkoutNodeJsSdk.orders.OrdersCreateRequest();
+const request = new auth.checkoutNodeJsSdk.orders.OrdersCreateRequest();
 request.headers["prefer"] = "return=representation";
 request.requestBody({
     intent: 'CAPTURE',
