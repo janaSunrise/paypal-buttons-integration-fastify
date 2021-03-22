@@ -34,6 +34,23 @@ fastify.get('/paypal/payment', async (req, res) => {
   });
 })
 
+fastify.get('/paypal/capture', async (req, res) => {
+  const orderID = req.body.orderID;
+
+  const request = new auth.checkoutNodeJsSdk.orders.OrdersCaptureRequest(orderID);
+  request.requestBody({});
+
+  try {
+    const capture = await auth.client.execute(request);
+    const captureID = capture.result.purchase_units[0].payments.captures[0].id;
+  } catch (err) {
+    console.error(err);
+    return res.send(500);
+  }
+
+  res.send(200);
+})
+
 // Run the server
 const start = async () => {
   try {

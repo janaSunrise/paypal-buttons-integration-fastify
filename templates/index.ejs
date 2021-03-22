@@ -16,12 +16,31 @@
 
     <script>
         paypal.Buttons({
-            onApprove: function(data, actions) {
-                console.log(data);
-
-                return actions.order.capture().then(function(details) {
-                    alert('Transaction completed by ' + details.payer.name.given_name);
+            createOrder: function() {
+                return fetch('/paypal/payment', {
+                    method: 'post',
+                    headers: {
+                        'content-type': 'application/json'
+                    }
+                }).then(function(res) {
+                    return res.json();
+                }).then(function(data) {
+                    return data.id; // Use the key sent by your server's response, ex. 'id' or 'token'
                 });
+            },
+            onApprove: function(data) {
+                return fetch('/my-server/capture-paypal-transaction', {
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        orderID: data.orderID
+                    })
+                }).then(function(res) {
+                    return res.json();
+                }).then(function(details) {
+                    alert('Transaction funds captured from ' + details.payer_given_name);
+                })
             }
         }).render('#paypal-button-container');
     </script>
