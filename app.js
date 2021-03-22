@@ -36,6 +36,7 @@ fastify.get('/paypal/capture', async (req, res) => {
   const orderID = req.body.orderID;
 
   const request = new auth.checkoutNodeJsSdk.orders.OrdersCaptureRequest(orderID);
+  request.headers["prefer"] = "return=representation";
   request.requestBody({});
 
   try {
@@ -46,7 +47,7 @@ fastify.get('/paypal/capture', async (req, res) => {
     return res.status(500);
   }
 
-  res.status(200);
+  return { details: capture.result };
 })
 
 // Run the server

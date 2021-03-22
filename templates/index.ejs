@@ -21,7 +21,6 @@
                     .then(function(res) {
                         return res.json();
                     }).then(function(data) {
-                        console.log(data)
                         return data.orderID; // Use the key sent by your server's response, ex. 'id' or 'token'
                     });
             },
@@ -35,9 +34,11 @@
                         orderID: data.orderID
                     })
                 }).then(function(res) {
+                    console.log(res.json());
                     return res.json();
                 }).then(function(details) {
-                    alert('Transaction funds captured from ' + details.payer_given_name);
+                    console.log(details);
+                    alert('Transaction funds captured from ' + details.payer.name.given_name);
                 })
             }
         }).render('#paypal-button-container');
