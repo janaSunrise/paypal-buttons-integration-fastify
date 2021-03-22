@@ -26,12 +26,10 @@ fastify.get('/paypal/payment', async (req, res) => {
     order = await auth.client.execute(createOrder.request);
   } catch (err) {
     console.error(err);
-    return res.send(500);
+    return res.status(500);
   }
 
-  res.status(200).json({
-    orderID: order.result.id
-  });
+  return { orderID: order.result.id };
 })
 
 fastify.get('/paypal/capture', async (req, res) => {
@@ -45,10 +43,10 @@ fastify.get('/paypal/capture', async (req, res) => {
     const captureID = capture.result.purchase_units[0].payments.captures[0].id;
   } catch (err) {
     console.error(err);
-    return res.send(500);
+    return res.status(500);
   }
 
-  res.send(200);
+  res.status(200);
 })
 
 // Run the server
