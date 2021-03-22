@@ -6,9 +6,16 @@ const fastify = require('fastify')({
 const host = process.env.HOST || "127.0.0.1";
 const port = process.env.PORT || 3000;
 
+// Templating
+fastify.register(require('point-of-view'), {
+  engine: {
+    ejs: require('ejs')
+  }
+})
+
 // Declare a route
-fastify.get('/', async (request, reply) => {
-  return { hello: 'world' };
+fastify.get('/', async (req, res) => {
+  return { hello: "world" };
 })
 
 // Run the server
