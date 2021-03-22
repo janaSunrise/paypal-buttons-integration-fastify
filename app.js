@@ -1,5 +1,8 @@
 const fastify = require('fastify')({ logger: true });
+
+const auth = require('./utils/auth');
 const env = require('./utils/env');
+const createOrder = require('./utils/create_order');
 
 // App constants
 const host = process.env.HOST || "127.0.0.1";
@@ -18,7 +21,17 @@ fastify.get('/', async (req, res) => {
 })
 
 fastify.get('/paypal/payment', async (req, res) => {
+  let order;
+  try {
+    order = await auth.client.execute(createOrder.request);
+  } catch (err) {
+    console.error(err);
+    return res.send(500);
+  }
 
+  res.status(200).json({
+    orderID: order.result.id
+  });
 })
 
 // Run the server
