@@ -34,11 +34,10 @@
                         orderID: data.orderID
                     })
                 }).then(function(res) {
-                    console.log(res.json());
                     return res.json();
                 }).then(function(details) {
                     console.log(details);
-                    alert('Transaction funds captured from ' + details.payer.name.given_name);
+                    alert(`Transaction funds captured from ${details.result.payer.name.given_name} ${details.result.payer.name.surname}`);
                 })
             }
         }).render('#paypal-button-container');

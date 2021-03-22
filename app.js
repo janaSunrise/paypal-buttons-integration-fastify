@@ -32,7 +32,8 @@ fastify.get('/paypal/payment', async (req, res) => {
   return { orderID: order.result.id };
 })
 
-fastify.get('/paypal/capture', async (req, res) => {
+fastify.post('/paypal/capture', async (req, res) => {
+  let capture;
   const orderID = req.body.orderID;
 
   const request = new auth.checkoutNodeJsSdk.orders.OrdersCaptureRequest(orderID);
@@ -40,14 +41,14 @@ fastify.get('/paypal/capture', async (req, res) => {
   request.requestBody({});
 
   try {
-    const capture = await auth.client.execute(request);
-    const captureID = capture.result.purchase_units[0].payments.captures[0].id;
+    capture = await auth.client.execute(request);
+    let captureID = capture.result.purchase_units[0].payments.captures[0].id;
   } catch (err) {
     console.error(err);
     return res.status(500);
   }
 
-  return { details: capture.result };
+  return { result: capture.result };
 })
 
 // Run the server
