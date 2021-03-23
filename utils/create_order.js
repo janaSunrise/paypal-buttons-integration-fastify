@@ -1,7 +1,9 @@
 const auth = require('./auth');
 
 const request = new auth.paypalSDK.orders.OrdersCreateRequest();
-request.headers["prefer"] = "return=representation";
+request.headers["prefer"] = "return=representation";  // Headers for the Order creation
+
+// Contents for the Order
 request.requestBody({
     intent: 'CAPTURE',
     application_context: {

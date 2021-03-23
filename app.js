@@ -23,20 +23,20 @@ fastify.get('/', async (req, res) => {
 fastify.get('/paypal/payment', async (req, res) => {
   let order;
   try {
-    order = await auth.client.execute(createOrder.request);
+    order = await auth.client.execute(createOrder.request);  // Execute the order, get the result from API.
   } catch (err) {
     console.error(err);
     return res.status(500);
   }
 
-  return { result: order.result };
+  return { result: order.result };  // Returns as the alias result with the result of the order.
 })
 
 fastify.post('/paypal/capture', async (req, res) => {
   let capture;
   const orderID = req.body.orderID;
 
-  const request = new auth.paypalSDK.orders.OrdersCaptureRequest(orderID);
+  const request = new auth.paypalSDK.orders.OrdersCaptureRequest(orderID);  // Object to capture the funds from the order.
   request.headers["prefer"] = "return=representation";
   request.requestBody({});
 
@@ -48,7 +48,7 @@ fastify.post('/paypal/capture', async (req, res) => {
     return res.status(500);
   }
 
-  return { result: capture.result };
+  return { result: capture.result };  // Returned as the JSON structure where result is accessed.
 })
 
 // Run the server
