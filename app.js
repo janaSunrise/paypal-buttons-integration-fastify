@@ -36,7 +36,7 @@ fastify.post('/paypal/capture', async (req, res) => {
   let capture;
   const orderID = req.body.orderID;
 
-  const request = new auth.checkoutNodeJsSdk.orders.OrdersCaptureRequest(orderID);
+  const request = new auth.paypalSDK.orders.OrdersCaptureRequest(orderID);
   request.headers["prefer"] = "return=representation";
   request.requestBody({});
 

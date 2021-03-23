@@ -1,6 +1,6 @@
 const auth = require('./auth');
 
-const request = new auth.checkoutNodeJsSdk.orders.OrdersCreateRequest();
+const request = new auth.paypalSDK.orders.OrdersCreateRequest();
 request.headers["prefer"] = "return=representation";
 request.requestBody({
     intent: 'CAPTURE',
