@@ -21,7 +21,7 @@
                     .then(function(res) {
                         return res.json();
                     }).then(function(data) {
-                        return data.orderID; // Use the key sent by your server's response, ex. 'id' or 'token'
+                        return data.result.id; // Use the key sent by your server's response, ex. 'id' or 'token'
                     });
             },
             onApprove: function(data) {

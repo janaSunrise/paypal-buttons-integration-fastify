@@ -29,7 +29,7 @@ fastify.get('/paypal/payment', async (req, res) => {
     return res.status(500);
   }
 
-  return { orderID: order.result.id };
+  return { result: order.result };
 })
 
 fastify.post('/paypal/capture', async (req, res) => {
