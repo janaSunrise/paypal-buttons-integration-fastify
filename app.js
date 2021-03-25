@@ -18,7 +18,7 @@ fastify.register(require('point-of-view'), {
 
 // Declare a route
 fastify.get('/payment', async (req, res) => {
-    return res.view(`${template_prefix}/index.ejs`, { clientID: env.clientID, merchantID: env.merchantID });
+    return res.view(`${template_prefix}/payment.ejs`, { clientID: env.clientID, merchantID: env.merchantID });
 })
 
 fastify.get('/api/paypal/payment', async (req, res) => {
