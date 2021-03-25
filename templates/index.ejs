@@ -17,7 +17,7 @@
     <script>
         paypal.Buttons({
             createOrder: function() {
-                return fetch('/paypal/payment')
+                return fetch('/api/paypal/payment')
                     .then(function(res) {
                         return res.json();
                     }).then(function(data) {
@@ -25,7 +25,7 @@
                     });
             },
             onApprove: function(data) {
-                return fetch('/paypal/capture', {
+                return fetch('/api/paypal/capture', {
                     method: "POST",
                     headers: {
                         'content-type': 'application/json'

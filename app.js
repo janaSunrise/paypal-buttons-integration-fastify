@@ -7,6 +7,7 @@ const createOrder = require('./utils/create_order');
 // App constants
 const host = process.env.HOST || "127.0.0.1";
 const port = process.env.PORT || 3000;
+const template_prefix = "/templates"
 
 // Templating
 fastify.register(require('point-of-view'), {
@@ -17,10 +18,10 @@ fastify.register(require('point-of-view'), {
 
 // Declare a route
 fastify.get('/', async (req, res) => {
-    return res.view('/templates/index.ejs', { clientID: env.clientID, merchantID: env.merchantID });
+    return res.view(`${template_prefix}/index.ejs`, { clientID: env.clientID, merchantID: env.merchantID });
 })
 
-fastify.get('/paypal/payment', async (req, res) => {
+fastify.get('/api/paypal/payment', async (req, res) => {
     let order;
     try {
         order = await auth.client.execute(createOrder.request);  // Execute the order, get the result from API.
@@ -32,7 +33,7 @@ fastify.get('/paypal/payment', async (req, res) => {
     return { result: order.result };  // Returns as the alias result with the result of the order.
 })
 
-fastify.post('/paypal/capture', async (req, res) => {
+fastify.post('/api/paypal/capture', async (req, res) => {
     let capture;
     const orderID = req.body.orderID;
 
