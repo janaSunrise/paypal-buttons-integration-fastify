@@ -5,6 +5,7 @@
   "main": "app.js",
   "scripts": {
     "dev": "nodemon app",
+    "format": "prettier --write \"./**/*.{js,ts,json}\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -14,13 +15,16 @@
     "fastify-paypal-buttons"
   ],
   "author": "Sunrit Jana",
-  "license": "GPL-3.0-or-later",
+  "license": "MIT",
   "dependencies": {
     "@paypal/checkout-server-sdk": "^1.0.2",
     "dotenv": "^10.0.0",
     "ejs": "^3.1.6",
-    "fastify": "^3.21.0",
-    "nodemon": "^2.0.12",
+    "fastify": "^3.21.2",
     "point-of-view": "^4.15.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.12",
+    "prettier": "^2.4.1"
   }
 }
