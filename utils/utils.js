@@ -9,6 +9,7 @@ async function prettyPrint(jsonData, pre = '') {
     if (jsonData.hasOwnProperty(key)) {
       if (isNaN(key)) pretty += pre + capitalize(key) + ': ';
       else pretty += pre + (parseInt(key) + 1) + ': ';
+
       if (typeof jsonData[key] === 'object') {
         pretty += '\n';
         pretty += await prettyPrint(jsonData[key], pre + '    ');
@@ -20,4 +21,4 @@ async function prettyPrint(jsonData, pre = '') {
   return pretty;
 }
 
-module.exports = { prettyPrint: prettyPrint };
+module.exports = { prettyPrint };

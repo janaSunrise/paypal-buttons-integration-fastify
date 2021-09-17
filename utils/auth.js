@@ -1,12 +1,12 @@
-const env = require('./env');
+const { clientID, clientSecret } = require('./env');
 
 const paypalSDK = require('@paypal/checkout-server-sdk');
 
 // Change this to `ProductionEnvironment` when it's live.
-const environment = new paypalSDK.core.SandboxEnvironment(
-  env.clientID,
-  env.clientSecret
+const paypalEnvironment = new paypalSDK.core.SandboxEnvironment(
+  clientID,
+  clientSecret
 );
-const client = new paypalSDK.core.PayPalHttpClient(environment);
+const paypalClient = new paypalSDK.core.PayPalHttpClient(paypalEnvironment);
 
-module.exports = { client, environment, paypalSDK };
+module.exports = { paypalClient, paypalEnvironment, paypalSDK };
